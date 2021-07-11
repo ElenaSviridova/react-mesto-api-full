@@ -1,0 +1,24 @@
+.header__button {
+    font-size: 18px;
+    font-weight: normal;
+    font-family: 'Inter', 'Arial', sans-serif;
+    line-height: 22px;
+    text-align: right;
+    color: white;
+    margin: 0 0 0 24px;
+    text-decoration: none;
+    background-color:black;
+    border: none;
+}
+
+@media all and (max-width: 550px) {
+    .header__button {
+        margin: 5px 27px 0 ;
+        font-size: 16px;
+    }
+}
+
+.header__button:hover {
+    opacity: 60%;
+    cursor: pointer;
+}

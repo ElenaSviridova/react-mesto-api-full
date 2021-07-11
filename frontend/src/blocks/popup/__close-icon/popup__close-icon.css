@@ -1,0 +1,13 @@
+.popup__close-icon {
+    width: 48.28px;
+}
+
+@media all and (max-width: 650px) {
+    .popup__close-icon {
+        width: 36.77px;
+    }
+}
+
+    
+
+

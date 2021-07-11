@@ -1,0 +1,9 @@
+.profile__add-button-image {
+    max-width: 22px;
+}
+
+@media all and (max-width: 450px) {
+    .profile__add-button-image {
+        max-width: 16px;
+    }
+}

@@ -1,0 +1,7 @@
+@media all and (max-width: 550px) {
+    .header__user {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}

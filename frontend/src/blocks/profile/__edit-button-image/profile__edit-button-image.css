@@ -1,0 +1,13 @@
+.profile__edit-button-image {
+    width: 10px;
+    height: 10px;
+    padding: 6px;
+}
+
+@media all and (max-width: 650px) {
+    .profile__edit-button-image {
+        width: 7.5px;
+        height: 7.5px;
+        padding: 4.25px;
+    }
+}

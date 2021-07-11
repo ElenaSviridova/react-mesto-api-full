@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 45px 0 41px;
+    border-bottom: rgba(84,84,84,0.7) 1px solid;
+}
+
+@media all and (max-width: 950px) {
+    .header {
+        width: 78%;
+    }
+}
+
+@media all and (max-width: 550px) {
+    .header {
+        align-items: center;
+    }
+}
+
+@media all and (max-width: 450px) {
+    .header {
+        width: 100%;
+        padding: 28px 0 31.6px;
+        margin: 0;
+    }
+}

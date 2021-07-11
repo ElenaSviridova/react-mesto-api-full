@@ -1,0 +1,13 @@
+.footer {
+    width: 68.75%;
+    margin: 67px auto 60px;
+}
+
+@media all and (max-width: 650px) {
+    .footer {
+        width: 88%;
+        margin-top: 48px;
+        margin-bottom: 0;
+        padding-bottom: 36px;
+    }
+}

@@ -1,0 +1,10 @@
+.main {
+    width: 68.75%;
+    margin: 0 auto;
+}
+
+@media all and (max-width: 650px) {
+    .main {
+        width: 88%;
+    }
+}
