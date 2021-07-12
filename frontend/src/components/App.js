@@ -36,7 +36,7 @@ function App() {
             setCurrentUser(userData);
         })
         .catch(handleError)
-    }, []);
+    }, [loggedIn]);
 
     useEffect(() => {
         checkToken()

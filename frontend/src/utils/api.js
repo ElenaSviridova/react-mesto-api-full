@@ -1,4 +1,4 @@
-import BASE_URL from './auth';
+import {BASE_URL} from './auth';
 
 export class Api {
     constructor({adress, token}) {
