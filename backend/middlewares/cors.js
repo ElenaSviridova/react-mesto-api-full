@@ -16,9 +16,11 @@ module.exports = (req, res, next) => {
   if (allowedCors.includes(origin)) {
     // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
     res.header('Access-Control-Allow-Origin', origin);
-  } else if (method === 'OPTIONS') {
+  }
+  if (method === 'OPTIONS') {
     // разрешаем кросс-доменные запросы любых типов (по умолчанию)
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Request-Headers', req.headers['Access-Control-Request-Headers']);
   }
   next();
 };
