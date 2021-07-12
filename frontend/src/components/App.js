@@ -30,8 +30,17 @@ function App() {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        checkToken()
-    }, [])
+        Promise.all([api.getInitialCards(), api.getProfileInfo()])
+        .then(([data, userData]) => {
+            setCards(data);
+            setCurrentUser(userData);
+        })
+        .catch(handleError)
+    }, []);
+
+    // useEffect(() => {
+    //     checkToken()
+    // }, [])
 
   const history = useHistory();
 
@@ -40,15 +49,6 @@ function App() {
         history.push('/')
     }
   }, [loggedIn])
-
-  useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getProfileInfo()])
-    .then(([data, userData]) => {
-        setCards(data);
-        setCurrentUser(userData);
-    })
-    .catch(handleError)
-}, []);
 
   const handleError = (error) => console.error(error); 
 
@@ -147,17 +147,17 @@ function App() {
         localStorage.removeItem('token')
     }
 
-    function checkToken() {
-        const token = localStorage.getItem('token')
-        if (token) {
-            auth.getContent(token)
-            .then(res => {
-                setEmail(res.data.email)
-                setLoggedIn(true)
-            })
-            .catch(handleError)
-        }
-    }
+    // function checkToken() {
+    //     const token = localStorage.getItem('token')
+    //     if (token) {
+    //         auth.getContent(token)
+    //         .then(res => {
+    //             setEmail(res.data.email)
+    //             setLoggedIn(true)
+    //         })
+    //         .catch(handleError)
+    //     }
+    // }
 
 
     function handleRegister({email, password}) {
