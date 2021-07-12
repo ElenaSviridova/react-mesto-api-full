@@ -1,3 +1,5 @@
+import BASE_URL from './auth';
+
 export class Api {
     constructor({adress, token}) {
         this._adress = adress;
@@ -92,6 +94,7 @@ export class Api {
     }
 }
 
-const api = new Api({adress:'https://mesto.nomoreparties.co/v1/cohort-22', token:'3df83bef-b96a-43f8-aaa6-dee5c669d99f'});
+const api = new Api({adress: BASE_URL, token:'3df83bef-b96a-43f8-aaa6-dee5c669d99f'});
+// const api = new Api({adress: BASE_URL, token:'3df83bef-b96a-43f8-aaa6-dee5c669d99f'});
 
 export default api

@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "npx eslint"
+    "lint": "npx eslint",
+    "deploy": "npm run build && scp -r ./build/* elena_sviridova@130.193.52.76:/home/elena_sviridova/react-mesto-api-full/frontend"
   },
   "keywords": [],
   "author": "",
