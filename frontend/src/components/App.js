@@ -30,26 +30,25 @@ function App() {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        Promise.all([api.getInitialCards(), api.getProfileInfo()])
-        .then(([data, userData]) => {
-            setCards(data);
-            setCurrentUser(userData);
-        })
-        .catch(handleError)
-    }, [loggedIn]);
-
-    useEffect(() => {
         checkToken()
     }, [])
 
-    useEffect(() => {
-        if(loggedIn) {
-            history.push('/')
-        }
-    }, [loggedIn])
-
-
   const history = useHistory();
+
+  useEffect(() => {
+    if(loggedIn) {
+        history.push('/')
+    }
+  }, [loggedIn])
+
+  useEffect(() => {
+    Promise.all([api.getInitialCards(), api.getProfileInfo()])
+    .then(([data, userData]) => {
+        setCards(data);
+        setCurrentUser(userData);
+    })
+    .catch(handleError)
+}, []);
 
   const handleError = (error) => console.error(error); 
 
@@ -72,7 +71,6 @@ function App() {
     })
     .catch(handleError)
   }
-    
     
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
