@@ -11,6 +11,7 @@ const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const { ERR_NOT_FOUND, ERR_INTERNAL_SERVER_ERROR } = require('./constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
@@ -35,6 +36,8 @@ async function start() {
 start();
 
 app.use(requestLogger);
+
+app.use(cors);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({

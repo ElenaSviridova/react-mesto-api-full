@@ -18,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build && scp -r ./build/* elena_sviridova@130.193.52.76:/home/elena_sviridova/mesto-frontend" 
+    "deploy": "gh-pages -d build && scp -r ./build/* elena_sviridova@130.193.52.76:/home/elena_sviridova/react-mesto-api-full/frontend" 
   },
   "eslintConfig": {
     "extends": [
