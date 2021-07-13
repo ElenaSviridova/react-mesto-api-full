@@ -46,7 +46,7 @@ function App() {
     if(loggedIn) {
         history.push('/');
     }
-  }, [history, loggedIn])
+  }, [loggedIn])
 
   const handleError = (error) => console.error(error); 
 
