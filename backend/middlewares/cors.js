@@ -2,6 +2,7 @@
 const allowedCors = [
   'http://domainname.students.nomoredomains.club',
   'http://api.sviridova.students.nomoredomains.club',
+  'http://localhost:3000',
 ];
 
 module.exports = (req, res, next) => {
@@ -26,7 +27,7 @@ module.exports = (req, res, next) => {
     // разрешаем кросс-доменные запросы любых типов (по умолчанию)
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.statusCode().send();
+    res.status(200).send();
     return;
   }
   next();

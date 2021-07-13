@@ -29,6 +29,7 @@ function App() {
     const [isModalPopupOpen, setisModalPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
+
     useEffect(() => {
         Promise.all([api.getInitialCards(), api.getProfileInfo()])
         .then(([data, userData]) => {
@@ -38,17 +39,14 @@ function App() {
         .catch(handleError)
     }, []);
 
-    // useEffect(() => {
-    //     checkToken()
-    // }, [])
 
   const history = useHistory();
 
   useEffect(() => {
     if(loggedIn) {
-        history.push('/')
+        history.push('/');
     }
-  }, [loggedIn])
+  }, [history, loggedIn])
 
   const handleError = (error) => console.error(error); 
 
@@ -132,9 +130,9 @@ function App() {
 
     function handleLogin({email, password}) {
         auth.authorize(email, password)
-        .then(data => {
-            const {token} = data; 
-            localStorage.setItem('token', token)
+        .then(() => {
+            // const {token} = data; 
+            // localStorage.setItem('token', token)
             setLoggedIn(true)
             setEmail(email)
         })
@@ -144,7 +142,7 @@ function App() {
     function handleLogout() {
         setEmail('')
         setLoggedIn(false)
-        localStorage.removeItem('token')
+        // localStorage.removeItem('token')
     }
 
     // function checkToken() {
