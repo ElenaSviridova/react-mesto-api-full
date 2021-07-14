@@ -33,8 +33,8 @@ function App() {
         if(loggedIn) {
             Promise.all([api.getInitialCards(), api.getProfileInfo()])
             .then(([data, userData]) => {
-                setCards(data);
                 setCurrentUser(userData);
+                setCards(data);
             })
             .catch(handleError)
         }  

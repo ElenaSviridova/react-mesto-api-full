@@ -22,7 +22,13 @@ module.exports = {
     User.findById(req.user._id)
       .orFail(new NotFoundError('Пользователь с указанным _id не найден.'))
       .then((user) => {
-        res.send({ name: user.name, about: user.about, email: user.email });
+        res.send({
+          name: user.name,
+          about: user.about,
+          email: user.email,
+          avatar: user.avatar,
+          _id: user._id,
+        });
       })
       .catch(next);
   },
