@@ -14,7 +14,7 @@ module.exports = {
     User.findUserByCredentials(email, password)
       .then((user) => {
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-        return res.send(token);
+        return res.send({ token });
       })
       .catch(next);
   },
