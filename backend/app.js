@@ -1,5 +1,5 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -7,17 +7,16 @@ const { errors } = require('celebrate');
 const { celebrate, Joi } = require('celebrate');
 const userRoutes = require('./routes/user');
 const cardRoutes = require('./routes/card');
-const { login, createUser, logout } = require('./controllers/user');
+const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const { ERR_NOT_FOUND, ERR_INTERNAL_SERVER_ERROR } = require('./constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use(helmet());
 
@@ -37,8 +36,6 @@ start();
 
 app.use(requestLogger);
 
-app.use(cors);
-
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -54,8 +51,6 @@ app.post('/signup', celebrate({
     avatar: Joi.string().pattern(/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/),
   }),
 }), createUser);
-
-app.get('/logout', logout);
 
 app.use(auth);
 

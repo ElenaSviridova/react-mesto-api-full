@@ -1,8 +1,9 @@
 import {BASE_URL} from './auth';
 
 export class Api {
-    constructor({adress}) {
+    constructor({adress, token}) {
         this._adress = adress;
+        this._token = token;
     }
 
     _getResponseData(response) {
@@ -14,16 +15,17 @@ export class Api {
 
     getProfileInfo() {
         return fetch(`${this._adress}/users/me`, {
-            credentials: 'include',
+            headers: {
+                authorization: this._token
             }
-        ).then(this._getResponseData)
+        }).then(this._getResponseData)
     }
 
     changeProfileInfo(profileName, profileAbout) {
         return fetch(`${this._adress}/users/me`, {
             method: 'PATCH',
-            credentials: 'include', 
             headers: {
+                authorization: this._token,
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
@@ -36,15 +38,17 @@ export class Api {
 
     getInitialCards() {
         return  fetch(`${this._adress}/cards`,{
-            credentials: 'include',
+            headers: {
+                authorization: this._token
+            }
         }).then(this._getResponseData)
     }
 
     addCard(data) {
         return fetch(`${this._adress}/cards`, {
             method: 'POST',
-            credentials: 'include',
             headers: {
+                authorization:this._token,
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
@@ -58,7 +62,9 @@ export class Api {
     removeCards(id) {
         return  fetch(`${this._adress}/cards/${id}`,{
             method: 'DELETE',
-            credentials: 'include',
+            headers: {
+                authorization: this._token
+            }
         })
         .then(this._getResponseData)  
     }
@@ -66,7 +72,9 @@ export class Api {
     changeLikeCardStatus(cardId, isLiked) {
         return fetch(`${this._adress}/cards/likes/${cardId}`, {
             method: isLiked ? 'DELETE' : 'PUT',
-            credentials: 'include',
+            headers: {
+                authorization:this._token
+            }
         })
         .then(this._getResponseData)
     }
@@ -74,8 +82,8 @@ export class Api {
     updateAvatar(avatarLink) {
         return fetch(`${this._adress}/users/me/avatar`, {
             method: 'PATCH',
-            credentials: 'include',
             headers: {
+                authorization: this._token,
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
@@ -86,7 +94,6 @@ export class Api {
     }
 }
 
-const api = new Api({adress: BASE_URL});
-// const api = new Api({adress: BASE_URL, token:'3df83bef-b96a-43f8-aaa6-dee5c669d99f'});
+const api = new Api({adress: BASE_URL, token: localStorage.getItem('token') });
 
 export default api

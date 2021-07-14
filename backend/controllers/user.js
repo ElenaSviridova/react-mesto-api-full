@@ -14,13 +14,7 @@ module.exports = {
     User.findUserByCredentials(email, password)
       .then((user) => {
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-        return res
-          .cookie('jwt', token, {
-            // token - наш JWT токен, который мы отправляем
-            maxAge: 3600000,
-            httpOnly: true,
-          })
-          .end();
+        return res.send(token);
       })
       .catch(next);
   },
@@ -28,7 +22,7 @@ module.exports = {
     User.findById(req.user._id)
       .orFail(new NotFoundError('Пользователь с указанным _id не найден.'))
       .then((user) => {
-        res.send({ name: user.name, about: user.about, email: user.email });
+        res.send({ name: user.name, about: user.about });
       })
       .catch(next);
   },
@@ -84,8 +78,5 @@ module.exports = {
         res.status(OK).send({ user });
       })
       .catch(next);
-  },
-  logout(req, res) {
-    return res.clearCookie('jwt').send();
   },
 };

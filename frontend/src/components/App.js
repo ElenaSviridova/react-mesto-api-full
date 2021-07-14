@@ -29,33 +29,27 @@ function App() {
     const [isModalPopupOpen, setisModalPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
-    // console.log('cards',cards);
+    useEffect(() => {
+        Promise.all([api.getInitialCards(), api.getProfileInfo()])
+        .then(([data, userData]) => {
+            setCards(data);
+            setCurrentUser(userData);
+        })
+        .catch(handleError)
+    }, []);
 
     useEffect(() => {
         checkToken()
     }, [])
 
     useEffect(() => {
-        console.log('login?',loggedIn);
         if(loggedIn) {
-        Promise.all([api.getInitialCards(), api.getProfileInfo()])
-        .then(([data, userData]) => {
-            setCards(data);
-            console.log('Users',userData);
-            setCurrentUser(userData);
-        })
-        .catch(handleError)
+            history.push('/')
         }
-    }, [loggedIn]);
+    }, [loggedIn])
 
 
   const history = useHistory();
-
-  useEffect(() => {
-    if(loggedIn) {
-        history.push('/')
-    }
-  }, [loggedIn])
 
   const handleError = (error) => console.error(error); 
 
@@ -78,6 +72,7 @@ function App() {
     })
     .catch(handleError)
   }
+    
     
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
@@ -139,8 +134,9 @@ function App() {
 
     function handleLogin({email, password}) {
         auth.authorize(email, password)
-        .then((data) => {
-            console.log(data);
+        .then(data => {
+            const {token} = data; 
+            localStorage.setItem('token', token)
             setLoggedIn(true)
             setEmail(email)
         })
@@ -148,27 +144,23 @@ function App() {
     }
 
     function handleLogout() {
-        auth.logout()
-        .then((res) => {
-            console.log('logout', res)
-            setEmail('')
-            setLoggedIn(false)
-            history.push('sign-in')
-        })
+        setEmail('')
+        setLoggedIn(false)
+        localStorage.removeItem('token')
     }
 
     function checkToken() {
-        auth.getContent()
-           .then((res) => {
-            console.log('checktoken res ',res)
-            setEmail(res.email)
-            setLoggedIn(true)
+        const token = localStorage.getItem('token')
+        if (token) {
+            auth.getContent(token)
+            .then(res => {
+                setEmail(res.data.email)
+                setLoggedIn(true)
             })
-            .catch((err) => {
-                handleError();
-                history.push('/sign-in')
-            })
+            .catch(handleError)
+        }
     }
+
 
     function handleRegister({email, password}) {
         auth.register(email, password)
