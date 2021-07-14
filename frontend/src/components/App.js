@@ -150,15 +150,20 @@ function App() {
     }
 
     function handleLogout() {
-        setEmail('')
-        setLoggedIn(false)
         //localStorage.removeItem('token')
+        auth.logout()
+        .then((res) => {
+            setEmail('');
+            setLoggedIn(false);
+        })
+        .catch(handleError)
     }
 
     function checkToken() {
         auth.getContent()
-           .then(res => {
-           setEmail(res.data.email)
+           .then((res) => {
+            console.log('checktoken res ', res)
+            setEmail(res.email)
             setLoggedIn(true)
             })
             .catch(handleError)
