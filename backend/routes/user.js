@@ -2,12 +2,14 @@ const { celebrate, Joi } = require('celebrate');
 
 const router = require('express').Router();
 const {
-  findUsers, findOneUser, getUserInfo, updateProfile, updateAvatar,
+  findUsers, findOneUser, getUserInfo, updateProfile, updateAvatar, logout,
 } = require('../controllers/user');
 
 router.get('/', findUsers);
 
 router.get('/me', getUserInfo);
+
+router.post('/logout', logout);
 
 router.get('/:userId', celebrate({
   params: Joi.object().keys({

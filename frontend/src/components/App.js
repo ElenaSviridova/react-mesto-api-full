@@ -29,7 +29,7 @@ function App() {
     const [isModalPopupOpen, setisModalPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
-    console.log('cards',cards);
+    // console.log('cards',cards);
 
     useEffect(() => {
         checkToken()
@@ -41,7 +41,7 @@ function App() {
         Promise.all([api.getInitialCards(), api.getProfileInfo()])
         .then(([data, userData]) => {
             setCards(data);
-            console.log('cards',data);
+            console.log('Users',userData);
             setCurrentUser(userData);
         })
         .catch(handleError)
@@ -162,7 +162,10 @@ function App() {
             setEmail(res.email)
             setLoggedIn(true)
             })
-            .catch(handleError)
+            .catch((err) => {
+                handleError();
+                history.push('/sign-in')
+            })
     }
 
     function handleRegister({email, password}) {
