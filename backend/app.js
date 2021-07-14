@@ -55,7 +55,7 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-app.post('/logout', logout);
+app.get('/logout', logout);
 
 app.use(auth);
 

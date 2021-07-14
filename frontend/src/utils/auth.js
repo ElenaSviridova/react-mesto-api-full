@@ -44,7 +44,7 @@ export const getContent = () => {
 
 export const logout = () => {
   return fetch(`${BASE_URL}/logout`, {
-    method: 'POST',
+    method: 'GET',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',

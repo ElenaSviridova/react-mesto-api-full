@@ -152,6 +152,7 @@ function App() {
         .then(() => {
             setEmail('')
             setLoggedIn(false)
+            history.push('sign-in')
         })
     }
 
