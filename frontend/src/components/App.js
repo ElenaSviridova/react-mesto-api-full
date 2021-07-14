@@ -156,7 +156,8 @@ function App() {
         if (token) {
             auth.getContent(token)
             .then(res => {
-                setEmail(res.data.email)
+                console.log('checkToken', res);
+                setEmail(res.email)
                 setLoggedIn(true)
             })
             .catch(handleError)
