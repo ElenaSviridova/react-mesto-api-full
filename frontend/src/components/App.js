@@ -147,19 +147,6 @@ function App() {
         //localStorage.removeItem('token')
     }
 
-    // function checkToken() {
-    //     const token = localStorage.getItem('token')
-    //     if (token) {
-    //         auth.getContent(token)
-    //         .then(res => {
-    //             setEmail(res.data.email)
-    //             setLoggedIn(true)
-    //         })
-    //         .catch(handleError)
-    //     }
-    // }
-
-
     function handleRegister({email, password}) {
         auth.register(email, password)
         .then(() => {
