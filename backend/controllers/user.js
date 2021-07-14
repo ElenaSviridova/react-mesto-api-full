@@ -85,18 +85,4 @@ module.exports = {
       })
       .catch(next);
   },
-  userLogout(req, res, next) {
-    User.find({})
-      .then(() => {
-        const token = '';
-        return res
-          .cookie('jwt', token, {
-            // token - наш JWT токен, который мы отправляем
-            maxAge: 0,
-            httpOnly: true,
-          })
-          .end();
-      })
-      .catch(next);
-  },
 };
