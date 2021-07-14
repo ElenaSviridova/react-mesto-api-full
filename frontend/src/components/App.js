@@ -30,12 +30,14 @@ function App() {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
+        if(loggedIn) {
         Promise.all([api.getInitialCards(), api.getProfileInfo()])
         .then(([data, userData]) => {
             setCards(data);
             setCurrentUser(userData);
         })
         .catch(handleError)
+        }
     }, []);
 
 
@@ -45,7 +47,7 @@ function App() {
     if(loggedIn) {
         history.push('/')
     }
-  }, [loggedIn])
+  }, [history, loggedIn])
 
   const handleError = (error) => console.error(error); 
 
@@ -130,8 +132,9 @@ function App() {
     function handleLogin({email, password}) {
         auth.authorize(email, password)
         .then((data) => {
-             const {token} = data; 
-             localStorage.setItem('token', token)
+            console.log(data);
+             //const {token} = data; 
+             //localStorage.setItem('token', token)
             setLoggedIn(true)
             setEmail(email)
         })
@@ -141,7 +144,7 @@ function App() {
     function handleLogout() {
         setEmail('')
         setLoggedIn(false)
-        localStorage.removeItem('token')
+        //localStorage.removeItem('token')
     }
 
     // function checkToken() {

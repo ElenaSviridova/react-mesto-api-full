@@ -1,12 +1,14 @@
-export const BASE_URL = 'http://api.sviridova.students.nomoredomains.club';
+export const BASE_URL = 'https://api.sviridova.students.nomoredomains.club';
 // export const BASE_URL = 'https://auth.nomoreparties.co';
 
-const checkResponse = (response) => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
+const checkResponse = (response) => {
+  console.log(response)
+  response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
+}
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -19,7 +21,6 @@ export const register = (email, password) => {
 export const authorize = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
