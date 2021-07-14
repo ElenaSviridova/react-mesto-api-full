@@ -24,12 +24,16 @@ function App() {
     const [selectedCard, setSelectedCard] = useState(null);
     const [currentUser, setCurrentUser] = useState({});
     const [cards, setCards] = useState([]);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(null);
     const [fail, setFail] = useState(false);
     const [isModalPopupOpen, setisModalPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
     console.log('cards',cards);
+
+    useEffect(() => {
+        checkToken()
+    }, [])
 
     useEffect(() => {
         console.log('login?',loggedIn);
@@ -51,7 +55,7 @@ function App() {
     if(loggedIn) {
         history.push('/')
     }
-  }, [history, loggedIn])
+  }, [loggedIn])
 
   const handleError = (error) => console.error(error); 
 
@@ -149,6 +153,15 @@ function App() {
         setEmail('')
         setLoggedIn(false)
         //localStorage.removeItem('token')
+    }
+
+    function checkToken() {
+        auth.getContent()
+           .then(res => {
+           setEmail(res.data.email)
+            setLoggedIn(true)
+            })
+            .catch(handleError)
     }
 
     function handleRegister({email, password}) {

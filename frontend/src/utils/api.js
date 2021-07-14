@@ -58,7 +58,7 @@ export class Api {
     removeCards(id) {
         return  fetch(`${this._adress}/cards/${id}`,{
             method: 'DELETE',
-            credentials: 'include'
+            credentials: 'include',
         })
         .then(this._getResponseData)  
     }
@@ -66,7 +66,7 @@ export class Api {
     changeLikeCardStatus(cardId, isLiked) {
         return fetch(`${this._adress}/cards/likes/${cardId}`, {
             method: isLiked ? 'DELETE' : 'PUT',
-            credentials: 'include'
+            credentials: 'include',
         })
         .then(this._getResponseData)
     }
