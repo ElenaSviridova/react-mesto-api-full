@@ -86,6 +86,6 @@ module.exports = {
       .catch(next);
   },
   logout(req, res) {
-    return res.clearCookie('jwt');
+    return res.clearCookie('jwt').send();
   },
 };

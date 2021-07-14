@@ -149,7 +149,8 @@ function App() {
 
     function handleLogout() {
         auth.logout()
-        .then(() => {
+        .then((res) => {
+            console.log('logout', res)
             setEmail('')
             setLoggedIn(false)
             history.push('sign-in')
