@@ -141,8 +141,6 @@ function App() {
         auth.authorize(email, password)
         .then((data) => {
             console.log(data);
-             //const {token} = data; 
-             //localStorage.setItem('token', token)
             setLoggedIn(true)
             setEmail(email)
         })
@@ -150,9 +148,11 @@ function App() {
     }
 
     function handleLogout() {
-        setEmail('')
-        setLoggedIn(false)
-        //localStorage.removeItem('token')
+        auth.logout()
+        .then(() => {
+            setEmail('')
+            setLoggedIn(false)
+        })
     }
 
     function checkToken() {

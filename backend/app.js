@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 const { celebrate, Joi } = require('celebrate');
 const userRoutes = require('./routes/user');
 const cardRoutes = require('./routes/card');
-const { login, createUser } = require('./controllers/user');
+const { login, createUser, logout } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const { ERR_NOT_FOUND, ERR_INTERNAL_SERVER_ERROR } = require('./constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -54,6 +54,8 @@ app.post('/signup', celebrate({
     avatar: Joi.string().pattern(/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/),
   }),
 }), createUser);
+
+app.post('/logout', logout);
 
 app.use(auth);
 
