@@ -24,21 +24,25 @@ function App() {
     const [selectedCard, setSelectedCard] = useState(null);
     const [currentUser, setCurrentUser] = useState({});
     const [cards, setCards] = useState([]);
-    const [loggedIn, setLoggedIn] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [fail, setFail] = useState(false);
     const [isModalPopupOpen, setisModalPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
+    console.log('cards',cards);
+
     useEffect(() => {
+        console.log('login?',loggedIn);
         if(loggedIn) {
         Promise.all([api.getInitialCards(), api.getProfileInfo()])
         .then(([data, userData]) => {
             setCards(data);
+            console.log('cards',data);
             setCurrentUser(userData);
         })
         .catch(handleError)
         }
-    }, []);
+    }, [loggedIn]);
 
 
   const history = useHistory();

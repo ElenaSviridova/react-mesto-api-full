@@ -7,7 +7,7 @@ const NoAccessError = require('../errors/forbidden-error');
 module.exports = {
   findCards(req, res, next) {
     Card.find({})
-      .then((cards) => res.send({ cards }))
+      .then((cards) => res.send(cards))
       .catch(next);
   },
   createCard(req, res, next) {

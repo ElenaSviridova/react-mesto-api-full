@@ -14,7 +14,7 @@ export class Api {
 
     getProfileInfo() {
         return fetch(`${this._adress}/users/me`, {
-            credentials: 'include' 
+            credentials: 'include',
             }
         ).then(this._getResponseData)
     }
@@ -36,7 +36,7 @@ export class Api {
 
     getInitialCards() {
         return  fetch(`${this._adress}/cards`,{
-            credentials: 'include' 
+            credentials: 'include',
         }).then(this._getResponseData)
     }
 
