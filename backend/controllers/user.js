@@ -85,19 +85,13 @@ module.exports = {
       })
       .catch(next);
   },
-  logout(req, res, next) {
-    const { email, password } = req.body;
-    User.findUserByCredentials(email, password)
-      .then(() => {
-        const token = '';
-        return res
-          .cookie('jwt', token, {
-            // token - наш JWT токен, который мы отправляем
-            maxAge: 0,
-            httpOnly: true,
-          })
-          .end();
-      })
-      .catch(next);
+  logout(req, res) {
+    const token = '';
+    return res
+      .cookie('jwt', token, {
+        // token - наш JWT токен, который мы отправляем
+        maxAge: 0,
+        httpOnly: true,
+      });
   },
 };
