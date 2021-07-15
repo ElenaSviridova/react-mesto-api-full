@@ -23,5 +23,7 @@ module.exports = (req, res, next) => {
     throw new NoAuthorizationError('Необходима авторизация');
   }
   req.user = payload;// записываем пейлоуд в объект запроса
+
+  console.log('payload req.user', req.user);
   next();
 };
