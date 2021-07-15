@@ -81,12 +81,12 @@ function App() {
     console.log('card handle card like ', card);
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i === currentUser.id);
-
     console.log('isLiked ', isLiked);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, isLiked)
     .then((newCard) => {
+        console.log('new card', newCard);
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch(handleError)
@@ -164,6 +164,7 @@ function App() {
         setEmail('')
         setLoggedIn(false)
         localStorage.removeItem('token')
+        console.log("api.token after logout", api._token)
     }
 
     function handleRegister({email, password}) {

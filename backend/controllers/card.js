@@ -14,7 +14,7 @@ module.exports = {
     const owner = req.user._id;
     const { name, link } = req.body;
     Card.create({ name, link, owner })
-      .then((card) => res.send({ card }))
+      .then((card) => res.send(card))
       .catch(next);
   },
   removeCard(req, res, next) {
@@ -27,7 +27,7 @@ module.exports = {
         }
         Card.deleteOne({ _id: card._id })
           .then(() => {
-            res.status(OK).send({ card });
+            res.status(OK).send(card);
           })
           .catch(next);
       })
@@ -50,7 +50,7 @@ module.exports = {
     )
       .orFail(new NotFoundError('Карточка с указанным _id не найдена.'))
       .then((card) => {
-        res.status(OK).send({ card });
+        res.status(OK).send(card);
       })
       .catch(next);
   },
@@ -62,7 +62,7 @@ module.exports = {
     )
       .orFail(new NotFoundError('Карточка с указанным _id не найдена.'))
       .then((card) => {
-        res.status(OK).send({ card });
+        res.status(OK).send(card);
       })
       .catch(next);
   },

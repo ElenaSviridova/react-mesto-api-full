@@ -97,5 +97,6 @@ export class Api {
 
 const api = new Api({adress: BASE_URL, token: localStorage.getItem('token') });
 console.log("token in API", localStorage.getItem('token'))
+console.log("api.token", api._token)
 
 export default api
