@@ -81,7 +81,7 @@ function App() {
   function handleCardLike(card) {
     console.log('card handle card like ', card);
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser.id);
+    const isLiked = card.likes.some(i => i === currentUser.id);
 
     console.log('isLiked ', isLiked);
     
