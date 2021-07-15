@@ -16,10 +16,6 @@ const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
-console.log(process.env.NODE_ENV);
-console.log(process.env.VAL);
-console.log(process.env.JWT_SECRET);
-
 const app = express();
 
 app.use(helmet());
