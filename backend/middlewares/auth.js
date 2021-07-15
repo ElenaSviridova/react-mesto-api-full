@@ -1,10 +1,8 @@
-// import { JWT_SECRET } from '../controllers/user';
-
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET = 'some-secret-key' } = process.env;
-
 const NoAuthorizationError = require('../errors/no-authorization');
+
+const { JWT_SECRET = 'some-secret-key' } = process.env;
 
 module.exports = (req, res, next) => {
   // достаём авторизационный заголовок
