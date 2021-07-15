@@ -63,7 +63,7 @@
 }
 
 .login__button:hover {
-    opacity: 60%;
+    opacity: 0.6;
     cursor: pointer;
 }
 
@@ -101,7 +101,7 @@
 }
 
 .login__link:hover {
-    opacity: 60%;
+    opacity: 0.6;
     cursor: pointer;
 }
 

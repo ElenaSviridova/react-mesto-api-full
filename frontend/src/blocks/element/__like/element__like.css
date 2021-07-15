@@ -11,7 +11,7 @@
 }
 
 .element__like:hover {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .element__like_active {

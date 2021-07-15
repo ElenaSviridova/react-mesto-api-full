@@ -3,7 +3,8 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
-import api from '../utils/api';
+import {BASE_URL} from '../utils/auth';
+import Api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -32,12 +33,14 @@ function App() {
 
     const handleError = (error) => console.error(error); 
 
+    console.log('loggedIn 35 ', loggedIn);
+
     useEffect(() => {
-        console.log('useEffect PROMISE ALL - loggedIn:', loggedIn );
-        console.log('useEffect PROMISE ALL - token:', localStorage.getItem('token') );
+        checkToken()
+    }, [])
+
+    useEffect(() => {
         if(loggedIn) {
-            console.log('useEffect PROMISE ALL - loggedIn TRUE:', loggedIn );
-            console.log('useEffect PROMISE ALL - loggenIn TRUE token:', localStorage.getItem('token') );
             Promise.all([api.getInitialCards(), api.getProfileInfo()])
             .then(([data, userData]) => {
                 setCurrentUser(userData);
@@ -47,9 +50,7 @@ function App() {
         }  
     }, [loggedIn]);
 
-    useEffect(() => {
-        checkToken()
-    }, [])
+   
 
     useEffect(() => {
         if(loggedIn) {
@@ -69,6 +70,10 @@ function App() {
         .catch(handleError)
     }
 }
+
+
+const api = new Api({adress: BASE_URL, token: localStorage.getItem('token') });
+console.log("api.token", api._token)
 
   function handleCardDelete(card) {
         api.removeCards(card._id)

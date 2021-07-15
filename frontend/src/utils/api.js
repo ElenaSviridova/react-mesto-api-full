@@ -1,6 +1,4 @@
-import {BASE_URL} from './auth';
-
-export class Api {
+export default class Api {
     constructor({adress, token}) {
         this._adress = adress;
         this._token = token;
@@ -94,9 +92,3 @@ export class Api {
         .then(this._getResponseData)
     }
 }
-
-const api = new Api({adress: BASE_URL, token: localStorage.getItem('token') });
-console.log("token in API", localStorage.getItem('token'))
-console.log("api.token", api._token)
-
-export default api
