@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -15,9 +15,9 @@ const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
-// console.log(process.env.NODE_ENV);
-// console.log(process.env.PORT);
-// console.log(process.env.JWT_SECRET);
+console.log(process.env.NODE_ENV);
+console.log(process.env.PORT);
+console.log(process.env.JWT_SECRET);
 
 const app = express();
 
