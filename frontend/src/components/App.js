@@ -16,7 +16,6 @@ import * as auth from '../utils/auth.js';
 import InfoToolip from './InfoToolip';
 
 
-
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);

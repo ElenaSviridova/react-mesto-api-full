@@ -71,7 +71,7 @@ export class Api {
     }
 
     changeLikeCardStatus(cardId, isLiked) {
-        return fetch(`${this._adress}/cards/likes/${cardId}`, {
+        return fetch(`${this._adress}/cards/${cardId}/likes`, {
             method: isLiked ? 'DELETE' : 'PUT',
             headers: {
                 authorization: `Bearer ${this._token}`,
