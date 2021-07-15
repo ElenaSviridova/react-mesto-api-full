@@ -29,8 +29,16 @@ function App() {
     const [isModalPopupOpen, setisModalPopupOpen] = useState(false);
     const [email, setEmail] = useState('');
 
+    const history = useHistory();
+
+    const handleError = (error) => console.error(error); 
+
     useEffect(() => {
+        console.log('useEffect PROMISE ALL - loggedIn:', loggedIn );
+        console.log('useEffect PROMISE ALL - token:', localStorage.getItem('token') );
         if(loggedIn) {
+            console.log('useEffect PROMISE ALL - loggedIn TRUE:', loggedIn );
+            console.log('useEffect PROMISE ALL - loggenIn TRUE token:', localStorage.getItem('token') );
             Promise.all([api.getInitialCards(), api.getProfileInfo()])
             .then(([data, userData]) => {
                 setCurrentUser(userData);
@@ -50,10 +58,18 @@ function App() {
         }
     }, [loggedIn])
 
-
-  const history = useHistory();
-
-  const handleError = (error) => console.error(error); 
+  function checkToken() {
+    const token = localStorage.getItem('token')
+    if (token) {
+        auth.getContent(token)
+        .then(res => {
+            console.log('checkToken res', res);
+            setEmail(res.email)
+            setLoggedIn(true)
+        })
+        .catch(handleError)
+    }
+}
 
   function handleCardDelete(card) {
         api.removeCards(card._id)
@@ -65,7 +81,7 @@ function App() {
   function handleCardLike(card) {
     console.log('card handle card like ', card);
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i._id === currentUser.id);
 
     console.log('isLiked ', isLiked);
     
@@ -77,13 +93,11 @@ function App() {
     .catch(handleError)
   }
     
-    
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
         setSelectedCard(null)
-        
     }
 
     function closeModalPopup() {
@@ -140,9 +154,9 @@ function App() {
         auth.authorize(email, password)
         .then(data => {
             const {token} = data; 
-            localStorage.setItem('token', token)
-            setLoggedIn(true)
-            setEmail(email)
+            localStorage.setItem('token', token);
+            setLoggedIn(true);
+            setEmail(email);
         })
         .catch(handleError)
     }
@@ -152,20 +166,6 @@ function App() {
         setLoggedIn(false)
         localStorage.removeItem('token')
     }
-
-    function checkToken() {
-        const token = localStorage.getItem('token')
-        if (token) {
-            auth.getContent(token)
-            .then(res => {
-                console.log('checkToken', res);
-                setEmail(res.email)
-                setLoggedIn(true)
-            })
-            .catch(handleError)
-        }
-    }
-
 
     function handleRegister({email, password}) {
         auth.register(email, password)

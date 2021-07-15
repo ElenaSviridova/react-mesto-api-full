@@ -43,6 +43,7 @@ module.exports = {
       .catch(next);
   },
   likeCard(req, res, next) {
+    console.log("when like card req.user._id", req.user._id);
     Card.findByIdAndUpdate(
       req.params.cardId,
       { $addToSet: { likes: req.user._id } },

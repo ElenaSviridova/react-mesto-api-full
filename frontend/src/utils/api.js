@@ -40,6 +40,7 @@ export class Api {
         return  fetch(`${this._adress}/cards`,{
             headers: {
                 authorization: `Bearer ${this._token}`,
+                'Content-type': 'application/json'
             }
         }).then(this._getResponseData)
     }
