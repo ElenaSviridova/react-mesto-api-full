@@ -25,7 +25,7 @@ module.exports = (req, res, next) => {
   req.user = payload;// записываем пейлоуд в объект запроса
 
   console.log('payload req.user', req.user);
-  console.log('req.params.cardId', req.params.cardId);
+  console.log('req.params', req.params);
 
   next();
 };
