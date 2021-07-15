@@ -1,5 +1,5 @@
+require('dotenv').config();
 const express = require('express');
-// const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -15,9 +15,11 @@ const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
-const app = express();
+console.log(process.env.NODE_ENV);
+console.log(process.env.PORT);
+console.log(process.env.JWT_SECRET);
 
-// app.use(cookieParser());
+const app = express();
 
 app.use(helmet());
 
