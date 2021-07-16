@@ -37,6 +37,7 @@ function App() {
 
     useEffect(() => {
         checkToken()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
             })
             .catch(handleError)
         }  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loggedIn]);
 
    
@@ -56,6 +58,7 @@ function App() {
         if(loggedIn) {
             history.push('/')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loggedIn])
 
   function checkToken() {
