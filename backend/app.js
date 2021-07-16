@@ -1,4 +1,5 @@
 const express = require('express');
+const limitter = require('express-rate-limit');
 
 require('dotenv').config();
 const bodyParser = require('body-parser');
@@ -36,6 +37,14 @@ async function start() {
 start();
 
 app.use(requestLogger);
+app.use(limitter({
+  windowsMs: 5000,
+  max: 50,
+  message: {
+    code: 429,
+    message: 'Слишком много запросов, подождите',
+  },
+}));
 
 app.use(cors);
 
