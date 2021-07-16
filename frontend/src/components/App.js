@@ -130,6 +130,7 @@ console.log("api.token", api._token)
     function handleUpdateUser({name,about}) {
         api.changeProfileInfo(name, about)
         .then(data => {
+            console.log('hahdleUdateUserAPP',data);
             setCurrentUser(data);
             closeAllPopups()
           })

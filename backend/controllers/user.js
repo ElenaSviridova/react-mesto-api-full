@@ -73,7 +73,7 @@ module.exports = {
     const { name, about } = req.body;
     User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
       .then((user) => {
-        res.status(OK).send({ user });
+        res.status(OK).send(user);
       })
       .catch(next);
   },
