@@ -10,9 +10,12 @@ const userRoutes = require('./routes/user');
 const cardRoutes = require('./routes/card');
 const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
-const { ERR_NOT_FOUND, ERR_INTERNAL_SERVER_ERROR } = require('./constants');
+const { ERR_NOT_FOUND } = require('./constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
+const centralisedErrorsHandler = require('./middlewares/centralisederrorshandler');
+const NotFoundError = require('./errors/not-found-error');
+
 
 const { PORT = 3000 } = process.env;
 
@@ -67,7 +70,7 @@ app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
-  res.status(ERR_NOT_FOUND).send({ message: 'Запрашиваемый ресурс не найден' });
+  Promise.reject(new NotFoundError('Запрашиваемый ресурс не найден'));
   next();
 });
 
@@ -75,18 +78,7 @@ app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  const { statusCode = ERR_INTERNAL_SERVER_ERROR, message } = err;
-  res
-    .status(statusCode)
-    .send({
-      // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === ERR_INTERNAL_SERVER_ERROR
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
-  next();
-});
+app.use(centralisedErrorsHandler);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
