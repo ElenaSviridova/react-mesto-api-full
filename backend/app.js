@@ -70,9 +70,12 @@ app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
-  console.log(res);
-  // throw new NotFoundError('Запрашиваемый ресурс не найден');
-  next();
+  // console.log(res);
+  try {
+    throw new NotFoundError('Запрашиваемый ресурс не найден');
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
