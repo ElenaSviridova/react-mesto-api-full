@@ -9,7 +9,6 @@ import Header from './Header';
 function Main({onEditProfile, onAddPlace , onEditAvatar, onCardClick, onCardLike, onCardDelete, cards, handleLogout, email}) {
 
   const currentUser = React.useContext(CurrentUserContext);
-  console.log('currentUser in main', currentUser);
 
     return (
       <>

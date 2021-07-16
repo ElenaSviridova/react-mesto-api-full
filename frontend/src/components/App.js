@@ -33,7 +33,7 @@ function App() {
 
     const handleError = (error) => console.error(error); 
 
-    console.log('loggedIn 35 ', loggedIn);
+    //console.log('loggedIn 35 ', loggedIn);
 
     useEffect(() => {
         checkToken()
@@ -63,7 +63,6 @@ function App() {
     if (token) {
         auth.getContent(token)
         .then(res => {
-            console.log('checkToken res', res);
             setEmail(res.email)
             setLoggedIn(true)
         })
@@ -73,7 +72,7 @@ function App() {
 
 
 const api = new Api({adress: BASE_URL, token: localStorage.getItem('token') });
-console.log("api.token", api._token)
+// console.log("api.token", api._token)
 
   function handleCardDelete(card) {
         api.removeCards(card._id)
@@ -83,15 +82,12 @@ console.log("api.token", api._token)
   }
 
   function handleCardLike(card) {
-    console.log('card handle card like ', card);
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i === currentUser.id);
-    console.log('isLiked ', isLiked);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, isLiked)
     .then((newCard) => {
-        console.log('new card', newCard);
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch(handleError)
@@ -130,7 +126,6 @@ console.log("api.token", api._token)
     function handleUpdateUser({name,about}) {
         api.changeProfileInfo(name, about)
         .then(data => {
-            console.log('hahdleUdateUserAPP',data);
             setCurrentUser(data);
             closeAllPopups()
           })
@@ -167,10 +162,9 @@ console.log("api.token", api._token)
     }
 
     function handleLogout() {
-        setEmail('')
-        setLoggedIn(false)
-        localStorage.removeItem('token')
-        console.log("api.token after logout", api._token)
+        setEmail('');
+        setLoggedIn(false);
+        localStorage.removeItem('token');
     }
 
     function handleRegister({email, password}) {
