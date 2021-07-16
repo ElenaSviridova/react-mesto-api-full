@@ -1,7 +1,9 @@
-Массив доменов, с которых разрешены кросс-доменные запросы
+// Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'https://domainname.students.nomoredomains.club',
   'https://api.sviridova.students.nomoredomains.club',
+  'http://domainname.students.nomoredomains.club',
+  'http://api.sviridova.students.nomoredomains.club',
   'http://localhost:3000',
 ];
 
@@ -28,7 +30,7 @@ module.exports = (req, res, next) => {
     // разрешаем кросс-доменные запросы любых типов (по умолчанию)
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', origin);
     res.status(200).send();
     return;
   }
