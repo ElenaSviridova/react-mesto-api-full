@@ -10,12 +10,10 @@ const userRoutes = require('./routes/user');
 const cardRoutes = require('./routes/card');
 const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
-const { ERR_NOT_FOUND } = require('./constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 const centralisedErrorsHandler = require('./middlewares/centralisederrorshandler');
 const NotFoundError = require('./errors/not-found-error');
-
 
 const { PORT = 3000 } = process.env;
 
@@ -70,7 +68,6 @@ app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
-  // console.log(res);
   try {
     throw new NotFoundError('Запрашиваемый ресурс не найден');
   } catch (err) {
