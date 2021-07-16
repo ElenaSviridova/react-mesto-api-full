@@ -70,7 +70,8 @@ app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
-  Promise.reject(new NotFoundError('Запрашиваемый ресурс не найден'));
+  console.log(res);
+  // throw new NotFoundError('Запрашиваемый ресурс не найден');
   next();
 });
 
