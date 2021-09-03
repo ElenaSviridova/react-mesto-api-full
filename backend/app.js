@@ -46,7 +46,7 @@ app.use(limitter({
   },
 }));
 
-app.use(cors);
+// app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {

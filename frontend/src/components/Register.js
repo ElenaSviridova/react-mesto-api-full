@@ -29,7 +29,7 @@ function Register({handleRegister}) {
                 <input className='login__input' placeholder='Email' type="email" name="email" value={data.email} onChange={handleChange}></input>
                 <input className='login__input' placeholder='Пароль' type="password" name="password" value={data.password} onChange={handleChange}></input>
                 <button type="submit" className="login__button">Зарегистрироваться</button>
-                <h2 className='login__caption'>Уже зарегистрированы? <Link className='login__link' to="/sign-in">Войти</Link></h2>
+                <h2 className='login__caption'>Уже зарегистрированы? <Link className='login__link' to="/signin">Войти</Link></h2>
             </form>
         </div>
     )

@@ -1,9 +1,7 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'https://domainname.students.nomoredomains.club',
-  'https://api.sviridova.students.nomoredomains.club',
-  'http://domainname.students.nomoredomains.club',
-  'http://api.sviridova.students.nomoredomains.club',
+  'https://api.es.sviridova.nomoredomains.monster',
+  'http://api.es.sviridova.nomoredomains.monster',
   'http://localhost:3000',
 ];
 
