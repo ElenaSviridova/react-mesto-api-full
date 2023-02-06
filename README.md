@@ -11,7 +11,6 @@
 
 **JavaScript**
  В данном проекте использовались язык программтрования JavaScript.
-* [Ссылка на GitHub Pages](https://elenasviridova.github.io/react-mesto-api-full/)
 
 
 ### Как нас найти
